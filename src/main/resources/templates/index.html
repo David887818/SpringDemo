@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <title>Login</title>
+</head>
+<style>
+    body {
+        background-color: rgba(168, 13, 0, 0.55);
+    }
+
+</style>
+<body>
+
+<!--<div class="background w-100 d-flex justify-content-center align-items-center">-->
+<!--<div class="form w-25 rounded">-->
+<!--<div class="m-5">-->
+
+<!--<h3  th:text="${error}" class="text-danger"></h3>-->
+<!--<form action="/login" method="post">-->
+<!--<input type="email" class=" w-100 mt-2 btn btn-outline-dark" name="email" placeholder="Email">-->
+<!--<input type="password" class=" w-100 mt-2 btn btn-outline-dark" name="password"-->
+<!--placeholder="password">-->
+<!--<input type="submit" class=" w-100 mt-5 btn btn-dark" name="submit" value="Login">-->
+<!--</form>-->
+<!--<a href="/regForm"> <input type="submit" class=" w-100 mt-3 btn btn-dark" name="submit" value="Register"></a>-->
+<!--</div>-->
+<!--</div>-->
+
+<!--</div>-->
+<div class="d-flex w-100 justify-content-center align-items-center">
+<div class="w-25">
+    <h3>Add Book</h3>
+    <form action="/reg/addBook" method="post">
+        <input type="text" class=" w-100 mt-2 btn btn-outline-dark" name="title" placeholder="Email">
+        <input type="text" class=" w-100 mt-2 btn btn-outline-dark" name="description" placeholder="password">
+        <select name="author_id" class=" mt-2 btn btn-outline-dark form-control">
+            <option th:each="users : ${user}" th:text="${users.getName()}" th:value="${users.getId()}">
+            </option>
+        </select>
+    </form>
+    <a href="/regForm"> <input type="submit" class=" w-100 mt-3 btn btn-dark" name="submit" value="Register"></a>
+
+</div>
+</div>
+
+
+<div class="d-flex">
+    <div class="d-flex w-50 m-5 flex-column">
+        <h3>Users</h3>
+        <table class="table table-dark table-hover">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Email</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user:${user}">
+                <td th:text="${user.getId()}"></td>
+                <td th:text="${user.getName()}"></td>
+                <td th:text="${user.getSurname()}"></td>
+                <td th:text="${user.getEmail()}"></td>
+                <td><a th:href="@{'/reg/delete/'+${user.getId()}}">Delete</a></td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <div class="d-flex w-50 m-5 flex-column">
+        <h3>Books</h3>
+        <table class="table table-dark table-hover">
+
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="books:${book}">
+                <td th:text="${books.getId()}"></td>
+                <td th:text="${books.getTitle()}"></td>
+                <td th:text="${books.getDescription()}"></td>
+                <td><a th:href="@{'/reg/deleteBook/'+${books.getId()}}">Delete</a></td>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

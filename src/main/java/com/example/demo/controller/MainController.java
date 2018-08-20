@@ -23,12 +23,14 @@ public class MainController {
     BookRepository bookRepository;
 
     @GetMapping("/")
-    public String main(ModelMap modelMap) {
-        List<User> users = userRepository.findAll();
-        List<Book> books = bookRepository.findAll();
-        modelMap.addAttribute("user", users);
-        modelMap.addAttribute("book", books);
+    public String main() {
+
         return "index";
+    }
+
+    @PostMapping("/logout")
+    public String logout(){
+        return "redirect:/";
     }
 
     @GetMapping("/regForm")
@@ -48,16 +50,17 @@ public class MainController {
             if (user.getUserType().equals(UserType.ADMIN)) {
                 List<User> users = userRepository.findAll();
                 List<Book> books = bookRepository.findAll();
-                modelMap.addAttribute("users", users);
-                modelMap.addAttribute("user", user);
-                modelMap.addAttribute("books", books);
+                modelMap.addAttribute("users", user);
+                modelMap.addAttribute("user", users);
+                modelMap.addAttribute("book", books);
                 return "adminPage";
             } else {
                 List<User> users = userRepository.findAll();
                 List<Book> books = bookRepository.findAll();
-                modelMap.addAttribute("users", users);
-                modelMap.addAttribute("user", user);
-                modelMap.addAttribute("books", books);
+                modelMap.addAttribute("user", users);
+                modelMap.addAttribute("book", books);
+                modelMap.addAttribute("users", user);
+
                 return "userPage";
             }
         } else {
